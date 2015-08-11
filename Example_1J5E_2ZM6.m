@@ -5,7 +5,7 @@ Indices1 = '_A';      % all nucleotides in chain A
 File2 = '2ZM6';
 Indices2 = '_A';      % all nucleotides in chain A
 
-Comparison.Coloring = 'discrepancy'; % 'position' for position in the sequence, 'center' for distance from the center of the molecule, or 'discrepancy'
+Comparison.Coloring = 'position'; % 'position' for position in the sequence, 'center' for distance from the center of the molecule, or 'discrepancy'
 Comparison.RotationFigure = 1;       % figure number for rotation data points, or 0 for no figure
 Comparison.TranslationFigure = 2;    % figure number for translation data points, or 0 for no figure
 Comparison.RotationTranslationFigure = 3;  % figure number for angle of rotation versus norm of translation
@@ -16,6 +16,8 @@ Comparison.RotationData = 1;         % 1 means to return data in Comparison.Rcel
 Comparison.TranslationData = 1;      % 1 means to return data in Comparison.Tcell, 2 means to also write to Excel
 Comparison.RotationCutoff = 15;      % label nucleotides whose rotation vector has standardized distance above this number
 Comparison.TranslationCutoff = 15;   % label nucleotides whose translation vector has standardized distance above this number
+Comparison.UseR3DAlign = 0;
+Comparison.UseR3DandNW = 0;
 
 % if Matlab or Octave is in the FR3D directory, the following commands will add useful directories to the path
 

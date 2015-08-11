@@ -18,6 +18,8 @@
 % Comparison.Interactive is 1 to allow clicking on the RotationTranslationFigure to see 3D coordinates of aligned nucleotides
 % Comparison.CoordinateFigure tells in what figure window to display 3D coordinates
 % Comparison.AminoAcids tells whether or not to display nearby amino acids in CoordinateFigure
+% Comparison.UseR3DAlign is 1 if R3D Align is to make a structural alignment
+% Comparison.UseR3DandNW is 1 if the R3D Align alignment is to be augmented using NW alignments
 
 % Returned variables:
 % Comparison.RotationCovariance is the variance-covariance matrix using rotation data
@@ -65,16 +67,22 @@ if ~isfield(Comparison,'TranslationData'),
   Comparison.TranslationData = 1;
 end
 if ~isfield(Comparison,'RotationCutoff'),
-  Comparison.RotationCutoff = 15;
+  Comparison.RotationCutoff = 25;
 end
 if ~isfield(Comparison,'TranslationCutoff'),
-  Comparison.TranslationCutoff = 15;
+  Comparison.TranslationCutoff = 25;
 end
 if ~isfield(Comparison,'Interactive'),
   Comparison.Interactive = 1;
 end
 if ~isfield(Comparison,'CoordinateFigure'),
   Comparison.CoordinateFigure = 1;
+end
+if ~isfield(Comparison,'UseR3DAlign'),
+  Comparison.UseR3DAlign = 0;
+end
+if ~isfield(Comparison,'UseR3DandNW'),
+  Comparison.UseR3DandNW = 0;
 end
 
 if Comparison.RotationTranslationFigure == 0 && Comparison.Interactive > 0,
@@ -119,7 +127,7 @@ if ~ischar(NTList1) && ~ischar(NTList2) && length(Indices1) ~= length(Indices2),
   zFlushOutput;
 end
 
-if ischar(NTList1) || ischar(NTList2) || length(Indices1) ~= length(Indices2),
+if (ischar(NTList1) || ischar(NTList2) || length(Indices1) ~= length(Indices2)) && Comparison.UseR3DAlign == 0,
   fprintf('Using Needleman-Wunsch to align nucleotide sequences\n');
   zFlushOutput;
   Sequence1 = cat(2,File1.NT(Indices1).Base);
@@ -129,6 +137,39 @@ if ischar(NTList1) || ischar(NTList2) || length(Indices1) ~= length(Indices2),
   zFlushOutput;
   Indices1 = Indices1(align1);
   Indices2 = Indices2(align2);
+elseif Comparison.UseR3DAlign == 1
+       Chain1{1} = File1.NT(1).Chain;
+       Chain2{1} = File2.NT(1).Chain;
+       [AlignedNTs1,AlignedNTs2,ErrorMsg] = R3DAlign(File1,Chain1,{'all'},File2,Chain2,{'all'},{0.5},{5},{10},{'greedy'});
+       OrigIndices1 = Indices1;
+       OrigIndices2 = Indices2;
+       Indices1 = cat(1,AlignedNTs1{:,4});
+       Indices2 = cat(1,AlignedNTs2{:,4});
+       if Comparison.UseR3DandNW == 1
+          D1=diff(Indices1);
+          D1 = [Indices1(1)-OrigIndices1(1); D1];
+          D2=diff(Indices2);
+          D2 = [Indices2(1)-OrigIndices2(1); D2];
+          F = find(D1>1 & D2>1);
+          for i = F'
+             if i == 1
+                I1 = OrigIndices1(1):Indices1(i)-1;
+                I2 = OrigIndices(1):Indices2(i)-1;
+             else
+                I1 = Indices1(i-1)+1:Indices1(i)-1;
+                I2 = Indices2(i-1)+1:Indices2(i)-1;
+             end
+             Sequence1 = cat(2,File1.NT(I1).Base);
+             Sequence2 = cat(2,File2.NT(I2).Base);
+             [matches,align1,align2,s1,s2] = zNeedlemanWunschAffineGap(Sequence1,Sequence2);
+             I1tmp = I1(align1);
+             I2tmp = I2(align2);
+             Indices1 = [Indices1; I1tmp'];
+             Indices2 = [Indices2; I2tmp'];
+          end
+          Indices1 = sort(Indices1);
+          Indices2 = sort(Indices2);
+       end  
 end
 
 % ------------------------------------ Superimpose local neighborhoods
