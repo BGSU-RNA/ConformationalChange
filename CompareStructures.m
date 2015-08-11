@@ -19,6 +19,10 @@
 % Comparison.CoordinateFigure tells in what figure window to display 3D coordinates
 % Comparison.AminoAcids tells whether or not to display nearby amino acids in CoordinateFigure
 
+% Returned variables:
+% Comparison.RotationCovariance is the variance-covariance matrix using rotation data
+% Comparison.TranslationCovariance is the variance-covariance matrix using translation data
+
 function [Comparison] = rEvaluateStructures(File1,Indices1,File2,Indices2,Comparison)
 
 if exist('OCTAVE_VERSION') ~= 0,
