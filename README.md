@@ -3,7 +3,7 @@ Matlab programs to detect local and large-scale conformational changes in RNA 3D
 
 <h3>Dependencies</h3>
 
-The ConformationalChange programs require a current release of FR3D, available at <a href="https://github.com/BGSU-RNA/FR3D">Github FR3D repository</a>.
+The ConformationalChange programs require a current release of FR3D, available at <a href="https://github.com/BGSU-RNA/FR3D/tree/dev">Github FR3D repository</a>.
 If you want to use R3D Align to align 3D structures which have less than near-complete sequence identity, you will also need release 1.0 of R3D align, available at <a href="https://github.com/BGSU-RNA/R3DAlign/releases/tag/v1.0">Github R3D Align repository</a>.
 
 We suggest placing the FR3D, R3DAlign, and ConformationalChange program files in three separate folders inside of a Github folder, and not to edit these programs directly so that your edits are not overwritten by downloading a new version of the repositories.
