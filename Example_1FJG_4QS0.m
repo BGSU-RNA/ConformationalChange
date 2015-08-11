@@ -16,8 +16,8 @@ Comparison.RotationData = 1;         % 1 means to return data in Comparison.Rcel
 Comparison.TranslationData = 1;      % 1 means to return data in Comparison.Tcell, 2 means to also write to Excel
 Comparison.RotationCutoff = 15;      % label nucleotides whose rotation vector has standardized distance above this number
 Comparison.TranslationCutoff = 15;   % label nucleotides whose translation vector has standardized distance above this number
-Comparison.UseR3DAlign = 1;
-Comparison.UseR3DandNW = 1;
+Comparison.UseR3DAlign = 0;
+Comparison.UseR3DandNW = 0;
 
 % if Matlab or Octave is in the FR3D directory, the following commands will add useful directories to the path
 
