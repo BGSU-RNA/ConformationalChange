@@ -1,8 +1,8 @@
 % This file specifies two RNA 3D structure files, calculates conformational changes, and interactively displays local regions
 clear Comparison
-File1 = '2UUB';
+File1 = '1J5E';
 Indices1 = '_A';      % all nucleotides in chain A
-File2 = '2UUC';
+File2 = '2AVY';
 Indices2 = '_A';      % all nucleotides in chain A
 
 Comparison.Coloring = 'center';      % 'position' for position in the sequence, 'center' for distance from the center of the molecule, or 'discrepancy'
@@ -17,7 +17,7 @@ Comparison.RotationData = 1;         % 1 means to return data in Comparison.Rcel
 Comparison.TranslationData = 1;      % 1 means to return data in Comparison.Tcell, 2 means to also write to Excel
 Comparison.RotationCutoff = 25;      % label nucleotides whose rotation vector has standardized distance above this number
 Comparison.TranslationCutoff = 25;   % label nucleotides whose translation vector has standardized distance above this number
-Comparison.UseR3DAlign = 0;
+Comparison.UseR3DAlign = 1;
 Comparison.UseR3DandNW = 0;
 
 % if Matlab or Octave is in the FR3D directory, the following commands will add useful directories to the path
@@ -35,7 +35,7 @@ addpath('PDBFiles');
 save(['Comparison_' File1 Indices1 '_' File2 Indices2 '.mat'],'Comparison');
 
 % the following line shows how to load a previously calculated comparison between structures to avoid re-calculating
-% load(['Comparison_2UUB_2UUC.mat']);
+% load(['Comparison_1J5E_2AVY.mat']);
 
 Comparison = Interact(Comparison);
 
