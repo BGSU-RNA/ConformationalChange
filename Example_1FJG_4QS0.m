@@ -11,11 +11,12 @@ Comparison.TranslationFigure = 2;    % figure number for translation data points
 Comparison.RotationTranslationFigure = 3;  % figure number for angle of rotation versus norm of translation
 Comparison.CoordinateFigure = 4;     % figure to show 3D coordinates in
 Comparison.Interactive = 1;          % after plotting, allow the user to click on the RotationTranslationFigure to select a nucleotide and its neighborhood
+Comparison.AminoAcids = 1;           % show / do not show amino acids when displaying local superpositions
 
 Comparison.RotationData = 1;         % 1 means to return data in Comparison.Rcell, 2 means to also write to Excel
 Comparison.TranslationData = 1;      % 1 means to return data in Comparison.Tcell, 2 means to also write to Excel
-Comparison.RotationCutoff = 15;      % label nucleotides whose rotation vector has standardized distance above this number
-Comparison.TranslationCutoff = 15;   % label nucleotides whose translation vector has standardized distance above this number
+Comparison.RotationCutoff = 25;      % label nucleotides whose rotation vector has standardized distance above this number
+Comparison.TranslationCutoff = 25;   % label nucleotides whose translation vector has standardized distance above this number
 Comparison.UseR3DAlign = 0;
 Comparison.UseR3DandNW = 0;
 
