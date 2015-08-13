@@ -47,4 +47,7 @@ build/config/buildinfo.properties
 
 # project-specific
 *.mat
+*.doc
+*.docx
+*.pdf
 R3D Align Output
