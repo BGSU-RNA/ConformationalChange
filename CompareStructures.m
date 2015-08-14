@@ -169,7 +169,7 @@ elseif Comparison.UseR3DAlign == 1
           end
           Indices1 = sort(Indices1);
           Indices2 = sort(Indices2);
-       end  
+       end
 end
 
 % ------------------------------------ Superimpose local neighborhoods
@@ -503,3 +503,5 @@ Comparison.RotationCovariance = Sr;
 Comparison.TranslationCovariance = St;
 Comparison.RotationStandardDistances = D2r;
 Comparison.TranslationStandardDistances = D2t;
+Comparison.RotationSquareRoot = sqrt(trace(Sr));
+Comparison.TranslationSquareRoot = sqrt(trace(St));
